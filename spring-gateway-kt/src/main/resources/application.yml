@@ -1,0 +1,17 @@
+server:
+  port: 17566
+
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - name: SCGGlobalFilter
+      routes:
+        - id: sg-ms1
+          uri: http://localhost:16876/
+          predicates:
+            - Path=/sg-ms1/**
+          filters:
+            - name: SCGPreFilter
+            - name: SCGPostFilter
+            - RewritePath=/sg-ms1/(?<segment>.*), /$\{segment}
