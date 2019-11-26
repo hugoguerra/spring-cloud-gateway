@@ -22,6 +22,9 @@ func main() {
 
 	router.HandleFunc(path, controllers.RetrieveAll).Methods("GET")
 	router.HandleFunc(path, controllers.Save).Methods("POST")
+	router.HandleFunc(path+"/{id}", controllers.FindById).Methods("GET")
+	router.HandleFunc(path+"/{id}", controllers.Update).Methods("PUT")
+
 	http.ListenAndServe(":16877", router)
 }
 
